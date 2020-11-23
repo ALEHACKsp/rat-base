@@ -1,5 +1,5 @@
 # Rat Base
-A basic base for a Remote. Access. Tool. written in native C++ and PHP.
+A basic base for a Remote. Access. Tool. written in native C++, PHP, and MySQL.
 
 # Usage
 This RAT is not like most others it sends a GET request with all its data split by `|` to a API.
@@ -15,14 +15,36 @@ It then creates a loop that is going to run forever (well not forever since it's
 ```cpp
 PCInfo* LocalPC;
 
-	while (true) {
-		LocalPC = new PCInfo(); // Makes new instance of the computers info
+while (true) {
+	LocalPC = new PCInfo(); // Makes new instance of the computers info
+	
+	LocalPC->PushData(); // Pushes PC data to web-server
 
-		LocalPC->PushData(); // Pushes PC data to web-server
-
-		Sleep(1000);
-	}
+	Sleep(1000); // Waits 1 second
+}
 ```
+
+# Database Structure
+The `rats` table has a few values for frontend like serialnumbers, `last_active`, ip, and pc username.
+This is the `rats` SQL structure
+```sql
+CREATE TABLE `rat` (
+  `id` int(11) NOT NULL,
+  `pcname` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `ip` varchar(20) NOT NULL,
+  `disk_serial` varchar(255) NOT NULL,
+  `baseboard_serial` varchar(255) NOT NULL,
+  `ram_serial` varchar(255) NOT NULL,
+  `cpu` varchar(255) NOT NULL,
+  `last_active` datetime DEFAULT current_timestamp(),
+  `created_at` datetime DEFAULT current_timestamp()
+);
+```
+
+# API
+The API is quite simple it checks if the IP is already in any of the rows and if it is, API updates the row, if its not API inserts data into DB.
+
 
 # Why?
 This project was for me to see if i could make one with clean and code.
