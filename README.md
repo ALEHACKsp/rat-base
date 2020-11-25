@@ -51,8 +51,11 @@ This project was for me to see if i could make one with clean and code.
 
 # Credits
 In the API I used a function called get_ip() which was taken from @timothyikennedy
+
 In client I used a function called DoGET() which was taken from a stackoverflow post (I don't remember or have link)
+
 @Akex64: Creating the whole client except some functions and API
+
 @skadro-official: skCrypter / RCrypter.h
  
 
